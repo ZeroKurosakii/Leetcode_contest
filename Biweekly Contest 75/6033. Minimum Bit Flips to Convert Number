@@ -1,0 +1,53 @@
+//Author:ZeroKurosakii
+//張竣傑 @National Yang Ming Chiao Tung University dep.Civil Engineering
+//Coding on 2022/04/02
+
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        vector<int> arr_start;
+        vector<int> arr_end;
+        int cnt = 0;
+        while(start != 0){
+            if(start % 2 == 0){
+                arr_start.push_back(0);
+            }
+            else if(start % 2 == 1){
+                arr_start.push_back(1);
+            }
+            start = start / 2;
+            cnt++;
+        }
+        cnt = 0;
+        while(goal != 0){
+            if(goal % 2 == 0){
+                arr_end.push_back(0);
+            }
+            else if(goal % 2 == 1){
+                arr_end.push_back(1);
+            }
+            goal = goal / 2;
+        }
+        
+        int diff = 0;
+        int startlen = arr_start.size();
+        int endlen = arr_end.size();
+        if(startlen > endlen){
+            for(int i = 0 ; i < startlen - endlen ; i++){
+                arr_end.push_back(0);
+            }
+        }
+        else{
+            for(int i = 0 ; i < endlen - startlen ; i++){
+                arr_start.push_back(0);
+            }
+        }
+        
+        for(int i = 0 ; i < arr_start.size() ; i++){
+            if(arr_start[i] != arr_end[i]){
+                diff++;
+            }
+        }
+        return diff;
+    }
+};
